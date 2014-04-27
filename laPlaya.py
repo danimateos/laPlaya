@@ -12,15 +12,21 @@ class Beach:
     HERE = 0
     RIGHT= 1
 
-    def __init__(self, numberOfShops, spots=80, *args):
-
+    def __init__(self, *args):
+        spots= 80
         self.shops = []
         minStep = 1./spots
-        
+
+        if len(args[0])==1:
+            numberOfShops = int(args[0][0])
+        else:
+            numberOfShops = len(args[0])
+
         for i in range(numberOfShops):
-            print args 
-            if args !=():
-                spot = args[i]
+
+            if len(args[0])>1:
+                spot = float(args[0][i])
+                
             else:
                 spot= random.random()
 
@@ -110,10 +116,11 @@ class Shop:
         
         print 'shop #' + str(self.beach.getShops().index(self)) + ' @ ' + str(self.spot)
        
-numShops= int(sys.argv[1])
-if len(sys.argv)>2:
-    shopPositions = sys.argv[1:]
-b = Beach(numShops)
+
+
+
+
+b = Beach(sys.argv[1:])
 
 while(True):
     #os.system('cls' if os.name == 'nt' else 'clear')
