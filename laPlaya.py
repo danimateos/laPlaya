@@ -1,4 +1,4 @@
-
+import sys
 import random
 import time
 import os
@@ -7,21 +7,24 @@ simultaneous = False # do shops move at the exact same time?
 sameSpot = True # can 2 shops occupy the same spot?
 jump = False # do adjacent shops jump over each other? (dependent on sameSpot)
 
-
-
-
 class Beach:
     LEFT =-1
     HERE = 0
     RIGHT= 1
 
-    def __init__(self, numberOfShops, spots=80):
-        
+    def __init__(self, numberOfShops, spots=80, *args):
+
         self.shops = []
         minStep = 1./spots
-
+        
         for i in range(numberOfShops):
-            spot= random.random()
+            print args 
+            if args !=():
+                spot = args[i]
+            else:
+                spot= random.random()
+
+            
             self.shops.append(Shop(self, spot, minStep))
 
         for i in range(numberOfShops):
@@ -107,9 +110,11 @@ class Shop:
         
         print 'shop #' + str(self.beach.getShops().index(self)) + ' @ ' + str(self.spot)
        
+numShops= int(sys.argv[1])
+if len(sys.argv)>2:
+    shopPositions = sys.argv[1:]
+b = Beach(numShops)
 
-
-b = Beach(3)
 while(True):
     #os.system('cls' if os.name == 'nt' else 'clear')
     b.update()
