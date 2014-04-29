@@ -56,10 +56,37 @@ class Beach:
 
     def render(self):
         #print '\n'
-        for shop in self.shops:
+        copy= list(self.shops)
+        copy.sort(key=lambda Shop:Shop.spot)
+        marks = [x.getPosition() for x in copy]
+        #print marks
+        lineWidth = 80 
 
-            point = int(round((79* shop.getPosition())))
-            line =  point  * '.' + '#' + (79 - point)* '.' 
+        for shop in self.shops:
+            myPos= copy.index(shop)
+
+            if myPos==0:
+                left= 0
+                right= marks[myPos]/2+ marks[myPos+1]/2
+            elif myPos == len(marks)-1:
+                left= marks[myPos-1]/2 +marks[myPos]/2
+                right= 1
+            else:
+                left= marks[myPos-1]/2 +marks[myPos]/2
+                right= marks[myPos]/2+ marks[myPos+1]/2
+            point = shop.getPosition()
+
+            cMark = int(round((lineWidth* point)))
+            lMark = int(round((lineWidth* left)))
+            rMark = int(round((lineWidth* right)))
+
+            a= '.' * lMark
+            b= '-' * (cMark-lMark)
+            c= '#'
+            d= '-' * (rMark-cMark)
+            e= '.' * (lineWidth - rMark)
+            
+            line = a + b + c + d + e
             print line
 
         print '\n'
@@ -114,7 +141,7 @@ class Shop:
 
     def report(self):
         
-        print 'shop #' + str(self.beach.getShops().index(self)) + ' @ ' + str(self.spot)
+        print 'shop #' + str(self.beach.getShops().index(self)) + ' @ ' + str(self.spot) + ' owns ' + str(self.evalFitness(self.spot))
        
 
 
@@ -126,4 +153,4 @@ while(True):
     #os.system('cls' if os.name == 'nt' else 'clear')
     b.update()
     b.render()
-    time.sleep(0.01666)
+    time.sleep(0.03333)
