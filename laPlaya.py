@@ -17,15 +17,15 @@ class Beach:
         self.shops = []
         minStep = 1./spots
 
-        if len(args[0])==1:
-            numberOfShops = int(args[0][0])
+        if len(args)==1:
+            numberOfShops = int(args[0])
         else:
-            numberOfShops = len(args[0])
+            numberOfShops = len(args)
 
         for i in range(numberOfShops):
 
-            if len(args[0])>1:
-                spot = float(args[0][i])
+            if len(args)>1:
+                spot = float(args[i])
                 
             else:
                 spot= random.random()
@@ -147,7 +147,7 @@ class Shop:
 
 
 
-b = Beach(sys.argv[1:])
+b = Beach(*sys.argv[1:])
 
 while(True):
     #os.system('cls' if os.name == 'nt' else 'clear')
