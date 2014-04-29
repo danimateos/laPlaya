@@ -13,7 +13,7 @@ class Beach:
     RIGHT= 1
 
     def __init__(self, *args):
-        spots= 80
+        spots= 100
         self.shops = []
         minStep = 1./spots
 
