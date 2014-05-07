@@ -40,7 +40,7 @@ class Beach:
         
         
         for shop in self.shops:
-            shop.report()
+
             left = shop.look(Beach.LEFT)
             right= shop.look(Beach.RIGHT)
             #print left, right, '\n'
@@ -61,6 +61,9 @@ class Beach:
         marks = [x.getPosition() for x in copy]
         #print marks
         lineWidth = 80 
+
+        for shop in self.shops:
+            shop.report()
 
         for shop in self.shops:
             myPos= copy.index(shop)
